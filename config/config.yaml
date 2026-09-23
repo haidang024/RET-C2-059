@@ -1,0 +1,26 @@
+# Runtime configuration — RET-C2-059
+# Static discovery identity belongs in config/agent.yaml.
+
+# AgentBaseGraph backbone parameters
+max_retry: 3
+timeout_s: 30
+memory_enabled: false
+
+# This workflow completes in one linear pass and does not call interrupt().
+# PB-7 is therefore auto-waived as non-HITL.
+hitl:
+  enabled: false
+
+# Domain runtime parameters. Every path below resolves to a shipped rule file.
+legal_text_paths:
+  food_labeling_act: "config/rules/label_format_rules.json"
+  allergen_rules: "config/rules/allergens_28item.json"
+  premium_display_rules: "config/rules/keihinhyoji_blocklist.json"
+confidence_threshold: 0.85
+calorie_tolerance_pct: 0.05
+
+# Invocation-scoped Azure OpenAI settings.
+llm_provider: "azure_openai"
+llm_model: "azure-openai-deployment"
+temperature: 0.2
+max_tokens: 1024

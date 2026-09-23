@@ -1,0 +1,37 @@
+[project]
+name = "ret-c2-059"
+version = "1.0.3"
+description = "Retail Private Label Food Labeling Compliance Validation Agent — AgentCore Template"
+requires-python = ">=3.11"
+# The framework is installed from the private package registry by CI. Pinning
+# it here would make a default-index editable install fail.
+dependencies = [
+    "agenticstar-agentcore[marketplace,openai,platform-rag,platform-memory,platform-db,platform-storage-azure]==1.0.3",
+    "pyyaml==6.0.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.0.3",
+    "pytest-cov==5.0.0",
+    "pytest-asyncio==1.4.0",
+    "ruff==0.4.4",
+    "mypy==1.10.0",
+]
+
+[build-system]
+requires = ["setuptools==68.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+# AgentCore 1.0.x does not publish a py.typed marker. Keep project code strict
+# while treating the separately installed framework as an external boundary.
+ignore_missing_imports = true
+allow_subclassing_any = true
+disallow_untyped_decorators = false
